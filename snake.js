@@ -56,12 +56,34 @@ function init() {
     // Configurar eventos de teclado
     document.addEventListener('keydown', handleKeyPress);
     
-    // Configurar botões
+    // Configurar botões de jogo
     startBtn.addEventListener('click', startGame);
     restartBtn.addEventListener('click', startGame);
     playAgainBtn.addEventListener('click', () => {
         gameOverModal.style.display = 'none';
         startGame();
+    });
+    
+    // Configurar botões direcionais para mobile
+    const upBtn = document.getElementById('upBtn');
+    const downBtn = document.getElementById('downBtn');
+    const leftBtn = document.getElementById('leftBtn');
+    const rightBtn = document.getElementById('rightBtn');
+    
+    // Adicionar eventos de toque e clique para os botões direcionais
+    upBtn.addEventListener('click', () => handleDirectionChange('up'));
+    downBtn.addEventListener('click', () => handleDirectionChange('down'));
+    leftBtn.addEventListener('click', () => handleDirectionChange('left'));
+    rightBtn.addEventListener('click', () => handleDirectionChange('right'));
+    
+    // Prevenir comportamento padrão de toque para evitar zoom ou scroll
+    const directionBtns = document.querySelectorAll('.direction-btn');
+    directionBtns.forEach(btn => {
+        btn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const direction = btn.id.replace('Btn', '');
+            handleDirectionChange(direction);
+        });
     });
     
     // Desenhar o canvas inicial
@@ -425,6 +447,32 @@ function handleKeyPress(e) {
             if (direction !== 'right') nextDirection = 'left';
             break;
         case 'ArrowRight':
+            if (direction !== 'left') nextDirection = 'right';
+            break;
+    }
+}
+
+// Função para lidar com mudanças de direção dos botões touch
+function handleDirectionChange(newDirection) {
+    if (!gameStarted) {
+        startGame();
+        return;
+    }
+    
+    if (!gameActive) return;
+    
+    // Aplicar a mesma lógica de prevenção de voltar sobre si mesma
+    switch (newDirection) {
+        case 'up':
+            if (direction !== 'down') nextDirection = 'up';
+            break;
+        case 'down':
+            if (direction !== 'up') nextDirection = 'down';
+            break;
+        case 'left':
+            if (direction !== 'right') nextDirection = 'left';
+            break;
+        case 'right':
             if (direction !== 'left') nextDirection = 'right';
             break;
     }
