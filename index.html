@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polychaeta - O Verme Marinho</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Polychaeta</h1>
+            <p>O Verme Marinho em Busca de comida</p>
+        </header>
+        
+        <div class="game-container">
+            <div class="game-info">
+                <div class="score-container">
+                    <span>Plâncton Consumido: </span>
+                    <span id="score">0</span>
+                </div>
+                <div class="high-score-container">
+                    <span>Recorde: </span>
+                    <span id="highScore">0</span>
+                </div>
+            </div>
+            
+            <canvas id="gameCanvas"></canvas>
+            
+            <div class="controls">
+                <div class="control-info">
+                    <p>Use as setas do teclado para movimentar a Polychaeta</p>
+                </div>
+                <div class="buttons">
+                    <button id="startBtn">Iniciar</button>
+                    <button id="restartBtn" style="display: none;">Reiniciar</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="gameOverModal" class="modal">
+            <div class="modal-content">
+                <h2>Polychaeta Encalhada!</h2>
+                <p>Seu verme marinho foi pro krl.</p>
+                <div class="game-over-image">
+                    <img id="gameOverImage" src="" alt="Reação ao Game Over">
+                </div>
+                <p class="final-score">Plâncton Consumido: <span id="finalScore">0</span></p>
+                <button id="playAgainBtn">Nadar Novamente</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Polychaeta - Por Ryan e ChatGPT &copy; 2025</p>
+    </footer>
+    
+    <script src="snake.js"></script>
+</body>
+</html>
